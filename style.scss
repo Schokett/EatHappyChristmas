@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+$primary-color: #8a1032;
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    position: flex;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    min-height: 100vh;
+    margin: 0;
+}
+
+#Logo {
+    padding-top: 5%;
+    display: block;
+    margin: 20px auto;
+}
+
+/* LinkBox */
+#LinkBox {
+    display: flex;
+    padding: 5%;
+    min-height: calc(100vh - 40px);
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    min-height: 100vh;
+    color: white;
+    font-size: 2em;
+    padding: 20px;
+    filter: drop-shadow(0 0 10px white);
+
+h2 {
+    font-family: 'Cinzel Decorative', serif;
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+
+    .boxed {
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        transition: background-color 0.3s;
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+/* Responsiv */
+@media (max-width: 768px) {
+    #LinkBox {
+        font-size: 1.5em;
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        .boxed {
+            max-width: 180px;
+            font-size: 0.9em;
+            padding: 8px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #LinkBox {
+        font-size: 1.2em;
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .boxed {
+            max-width: 150px;
+            font-size: 0.8em;
+            padding: 6px;
+        }
+    }
+}
+
+/* Snowflake Animation */
+
+@function random_range($min, $max) {
+  $rand: random();
+  $random_range: $min + floor($rand * (($max - $min) + 1));
+  @return $random_range;
+}
+
+.snow {
+  $total: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+
+  @for $i from 1 through $total {
+    $random-x: random(1000000) * 0.0001vw;
+    $random-offset: random_range(-100000, 100000) * 0.0001vw;
+    $random-x-end: $random-x + $random-offset;
+    $random-x-end-yoyo: $random-x + ($random-offset / 2);
+    $random-yoyo-time: random_range(30000, 80000) / 100000;
+    $random-yoyo-y: $random-yoyo-time * 100vh;
+    $random-scale: random(10000) * 0.0001;
+    $fall-duration: random_range(10, 30) * 1s;
+    $fall-delay: random(30) * -1s;
+
+    &:nth-child(#{$i}) {
+      opacity: random(10000) * 0.0001;
+      transform: translate($random-x, -10px) scale($random-scale);
+      animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+    }
+
+    @keyframes fall-#{$i} {
+      #{percentage($random-yoyo-time)} {
+        transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
+      }
+      to {
+        transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
+      }
+    }
+  }
+}
