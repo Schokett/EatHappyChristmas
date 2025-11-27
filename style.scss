@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 $primary-color: #8a1032;
 
@@ -10,11 +11,21 @@ body {
     margin: 0;
 }
 
-#Logo {
+#logo a{
     padding-top: 5%;
+    font-size: 1.5em;
     display: block;
     margin: 20px auto;
+    font-family: "Ms Madi", cursive;
+    text-decoration: none;
+    text-align: center;
+    color: white;
 }
+#kranz {
+    display: block;
+    margin: 0 auto;
+}
+
 
 #footer-gifts{
     display: block;
